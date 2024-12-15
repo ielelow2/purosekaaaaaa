@@ -229,47 +229,45 @@ export abstract class FlatNote extends Note {
     }
 
     playLinearNoteEffect() {
-        particle.effects.spawn(
-            this.linearEffectId,
-            linearEffectLayout({
-                lane: this.import.lane,
-                shear: 0,
-            }),
-            0.5,
-            false,
-        )
+        const linearEffectLayoutData = linearEffectLayout({
+            lane: this.import.lane,
+            shear: 0,
+        })
+        particle.effects.spawn(this.linearEffectId, linearEffectLayoutData, 0.5, false)
     }
 
     playCircularNoteEffect() {
+        const circularEffectLayoutData = circularEffectLayout({
+            lane: this.import.lane,
+            w: 1.75,
+            h: 1.05,
+        })
+
+        const perspectiveLayoutData = perspectiveLayout({
+            l: this.import.lane - this.import.size,
+            r: this.import.lane + this.import.size,
+            b: lane.b,
+            t: lane.t,
+        })
+
         particle.effects.spawn(
             this.circularEffectId,
-            circularEffectLayout({
-                lane: this.import.lane,
-                w: 1.75,
-                h: 1.05,
-            }),
-            perspectiveLayout({
-                l: this.import.lane - this.import.size,
-                r: this.import.lane + this.import.size,
-                b: lane.b,
-                t: lane.t,
-            }),
+            circularEffectLayoutData,
+            perspectiveLayoutData,
             0.6,
-            false,
+            false
         )
     }
 
     playLaneEffects() {
-        particle.effects.lane.spawn(
-            perspectiveLayout({
-                l: this.import.lane - this.import.size,
-                r: this.import.lane + this.import.size,
-                b: lane.b,
-                t: lane.t,
-            }),
-            0.3,
-            false,
-        )
+        const perspectiveLayoutData = perspectiveLayout({
+            l: this.import.lane - this.import.size,
+            r: this.import.lane + this.import.size,
+            b: lane.b,
+            t: lane.t,
+        })
+
+        particle.effects.lane.spawn(perspectiveLayoutData, 0.3, false)
     }
 
     spawnSlotEffects(startTime: number) {
