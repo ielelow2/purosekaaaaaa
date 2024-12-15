@@ -248,6 +248,12 @@ export abstract class FlatNote extends Note {
                 w: 1.75,
                 h: 1.05,
             }),
+            perspectiveLayout({
+                l: this.import.lane - this.import.size,
+                r: this.import.lane + this.import.size,
+                b: lane.b,
+                t: lane.t,
+            }),
             0.6,
             false,
         )
