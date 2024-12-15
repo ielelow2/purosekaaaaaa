@@ -246,7 +246,7 @@ export abstract class FlatNote extends Note {
             circularEffectLayout({
                 lane: this.import.lane,
                 w: 1.75,
-                h: 1.05,
+                h: 1.75,
             }),
             0.6,
             false,
